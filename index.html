@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Vida Útil LED</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .panel-calculadora,
+    .panel-texto {
+      flex: 1;
+      min-width: 300px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 30px;
+      max-width: 180px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #00695c;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .resultado {
+      margin-top: 30px;
+      font-size: 17px;
+      color: #2e7d32;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .copyright {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .panel-texto h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .panel-texto p {
+      line-height: 1.6;
+      color: #444;
+      font-size: 15px;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- Panel Izquierdo: Calculadora -->
+    <div class="panel-calculadora">
+      <img src="https://via.placeholder.com/200x60?text=Logo+Ilutrek" alt="Logo de Ilutrek" class="logo">
+
+      <h2>Calculadora de Vida Útil LED</h2>
+
+      <label for="vidaBase">Vida útil base (horas):</label>
+      <input type="number" id="vidaBase" value="50000">
+
+      <label for="tempBase">Temperatura de trabajo (°C) [Valor obtenido de la ficha tecnica del producto]:</label>
+      <input type="number" id="tempBase" value="25">
+
+      <label for="tempReal">Temperatura real de instalación (°C):</label>
+      <input type="number" id="tempReal" value="65">
+
+      <label for="usoDiario">Horas de uso diario:</label>
+      <input type="number" id="usoDiario" value="12">
+
+      <button onclick="calcularVida()">Calcular vida útil ajustada</button>
+
+      <div class="resultado" id="resultado"></div>
+
+      <div class="copyright">
+        © 2025 Ilutrek, S.L. Todos los derechos reservados.
+      </div>
+    </div>
+
+    <!-- Panel Derecho: Texto informativo -->
+    <div class="panel-texto">
+      <h3>Información IEC 62717:2014</h3>
+      <p>
+        La IEC 62717:2014 especifica los requisitos de rendimiento para los módulos LED, junto con los métodos y condiciones de prueba necesarios para demostrar el cumplimiento con esta norma. Su propósito es garantizar la calidad y consistencia en el desempeño de los módulos LED en aplicaciones de iluminación general.
+
+      </p>
+      <p>
+        <strong>Alcance</strong><br>
+
+Esta norma se aplica a módulos LED basados en tecnología LED inorgánica que producen luz blanca y están destinados a iluminación general. Cubre diferentes tipos de módulos LED, incluyendo:
+
+Tipo 1: Módulos LED integrados para uso con suministro de corriente continua hasta 250 V o corriente alterna hasta 50 V a 60 Hz o 1000 Hz.
+
+Tipo 2: Módulos LED que funcionan como parte de un dispositivo de control separado conectado a la tensión de red y tienen medios de control adicionales (semiintegrados) en su interior para operar a tensión constante, corriente constante o potencia constante.
+
+Tipo 3: Módulos LED donde todo el equipo de control está separado del módulo (no integrado) para operar bajo voltaje constante, corriente constante o potencia constante.
+
+      </p>
+	  <p>
+	  <strong>Principales Requisitos y Métodos de Prueba</strong><br>
+La norma establece diversos requisitos de rendimiento y los métodos de prueba correspondientes, entre los que se incluyen:<br>
+Mantenimiento del Flujo Luminoso: Se especifican procedimientos para evaluar la depreciación del flujo luminoso a lo largo del tiempo, utilizando términos como LxBy, donde:<br>
+Lx: Indica el porcentaje del flujo luminoso inicial mantenido (por ejemplo, L70 significa que se mantiene el 70% del flujo inicial).<br>
+By: Representa el porcentaje de módulos que caen por debajo del valor Lx especificado (por ejemplo, B10 indica que el 10% de los módulos están por debajo del 70% del flujo inicial).<br><br>
+
+Eficacia Luminosa: Se establecen requisitos sobre la relación entre el flujo luminoso emitido y la potencia consumida por el módulo LED.<br>
+
+Reproducción Cromática: Se determinan parámetros relacionados con la calidad de la luz emitida, como el Índice de Reproducción Cromática (IRC).<br>
+
+Tolerancias de Color: Se especifican límites para las variaciones de color entre módulos y a lo largo del tiempo.<br>
+
+Pruebas de Resistencia: Incluyen ensayos de temperatura y humedad para evaluar la durabilidad y fiabilidad de los módulos LED bajo diferentes condiciones ambientales.<br>
+
+<strong>Actualizaciones y Enmiendas</strong><br>
+La norma ha sido actualizada con enmiendas posteriores para incorporar avances tecnológicos y aclaraciones adicionales. Por ejemplo, la Enmienda 2 (IEC 62717:2014/AMD2:2019) introduce cambios significativos en los requisitos de rendimiento y métodos de prueba para módulos LED. <br><br>
+
+<strong>Relación con Otras Normas</strong><br>
+La IEC 62717 está estrechamente relacionada con otras normas, como la UNE-EN/IEC 62722, que establece los requisitos de rendimiento para luminarias LED. Ambas normas trabajan conjuntamente para garantizar la calidad y consistencia en la industria de la iluminación LED.<br><br>
+	</p>
+	<p>
+	<strong>Importancia de la Norma</strong><br>
+La implementación de la IEC 62717 es fundamental para:<br>
+Garantizar la calidad y consistencia en el rendimiento de los módulos LED.<br>
+Facilitar la comparación objetiva entre diferentes productos en el mercado.<br>
+Asegurar la fiabilidad y seguridad en aplicaciones de iluminación general.<br>
+Al seguir los lineamientos establecidos en esta norma, los fabricantes y usuarios pueden confiar en que los módulos LED cumplirán con los estándares internacionales de rendimiento y seguridad.
+
+	</p>
+    </div>
+
+  </div>
+
+  <script>
+    function calcularVida() {
+      const vidaBase = parseFloat(document.getElementById('vidaBase').value);
+      const tempBase = parseFloat(document.getElementById('tempBase').value);
+      const tempReal = parseFloat(document.getElementById('tempReal').value);
+      const usoDiario = parseFloat(document.getElementById('usoDiario').value);
+
+      const deltaTemp = tempReal - tempBase;
+      const vidaAjustada = vidaBase / Math.pow(2, deltaTemp / 10);
+      const diasDuracion = vidaAjustada / usoDiario;
+
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = `
+        Vida útil estimada ajustada: <strong>${vidaAjustada.toFixed(0)}</strong> horas<br>
+        Duración estimada: <strong>${diasDuracion.toFixed(0)}</strong> días
+      `;
+    }
+  </script>
+
+</body>
+</html>
